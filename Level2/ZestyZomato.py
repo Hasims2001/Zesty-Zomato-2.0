@@ -356,5 +356,36 @@ def getReadyOrders(state):
     except Exception as e:
             return jsonify({'issue': True, 'message': e})
 
+
+@app.route("/analysis", methods=['GET'])
+def getAnalysis():
+    try:
+        token = request.headers.get('Authorization')
+        decoded_token = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        user_data = decoded_token['user']
+        if(user_data['role'] == 'admin'):
+            delivered_orders = Orders.query.filter_by(status="Delivered").all()
+            revenue = 0
+            topItems = {}
+            for each in delivered_orders:
+                revenue += each.totalBill
+                items = each.items.split(",")
+                for i in items:
+                    if(i != " "):
+                        i = i.strip()
+                        if i in topItems:
+                            topItems[i] += 1
+                        else:
+                            topItems[i] = 1
+                        
+            
+            return jsonify({'issue': False, 'message': "Analysis", 'revenue': revenue, 'Top-Items': topItems})
+
+        else:
+            return jsonify({'issue': True,'message': 'Authorization is required'}) 
+    except Exception as e:
+            return jsonify({'issue': True, 'message': str(e)})
+
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,6 +2,8 @@ import unittest
 from ZestyZomato import app
 import json
 
+headers = { "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJtYW5hZ2VyIHZpY2t5Iiwicm9sZSI6ImFkbWluIn19.4BXq9CUyzu1xmzbMXiXCQRgYR2mJgQ__AKSqKyE70aA"}
+
 class ZomatoTest(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
@@ -41,7 +43,7 @@ class ZomatoTest(unittest.TestCase):
     # def test_dishes(self):
     #     # newDish with correct data
     #     newDish = {"name": "tomato chat", "price": 350, "availability": "Yes", "store":"Ahemdabad, Gujarat"}
-    #     headers = { "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJtYW5hZ2VyIHZpY2t5Iiwicm9sZSI6ImFkbWluIn19.4BXq9CUyzu1xmzbMXiXCQRgYR2mJgQ__AKSqKyE70aA"}
+    #     
     #     response = self.app.post("/menu", json=newDish, headers=headers)
     #     data = json.loads(response.data)
     #     self.assertEqual(data['message'], 'dish added')
@@ -64,7 +66,7 @@ class ZomatoTest(unittest.TestCase):
     # def test_patchdish(self):
     #     # updating dish
     #     updateDish  = {"price": 200, "availability": "Yes", "store":"Ahemdabad, Gujarat"}
-    #     headers = { "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJtYW5hZ2VyIHZpY2t5Iiwicm9sZSI6ImFkbWluIn19.4BXq9CUyzu1xmzbMXiXCQRgYR2mJgQ__AKSqKyE70aA"}
+    #     
     #     response = self.app.patch("/dish/11", json=updateDish, headers=headers)
     #     data = json.loads(response.data)
     #     self.assertEqual(data['message'], 'Dish with ID 11 has been updated')
@@ -83,7 +85,7 @@ class ZomatoTest(unittest.TestCase):
 
     # def test_deletedish(self):
     #     # deleting same dish
-    #     headers = { "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJtYW5hZ2VyIHZpY2t5Iiwicm9sZSI6ImFkbWluIn19.4BXq9CUyzu1xmzbMXiXCQRgYR2mJgQ__AKSqKyE70aA"}
+    #     
     #     res = self.app.delete('/dish/11', headers=headers)
     #     data  = json.loads(res.data)
     #     self.assertEqual(data['message'], 'Dish with ID 11 has been deleted')
@@ -113,7 +115,7 @@ class ZomatoTest(unittest.TestCase):
 
     # def test_patchorder(self):
     #     # updating the status of order
-    #     headers = { "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJtYW5hZ2VyIHZpY2t5Iiwicm9sZSI6ImFkbWluIn19.4BXq9CUyzu1xmzbMXiXCQRgYR2mJgQ__AKSqKyE70aA"}
+    #     
 
     #     res = self.app.patch('/order/5', json={'status': "preparing"}, headers=headers)
     #     data = json.loads(res.data)
@@ -132,14 +134,14 @@ class ZomatoTest(unittest.TestCase):
     #     self.assertEqual(data['message'], 'Order not found')
         
     # def test_deleteorder(self):
-    #     headers = { "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJtYW5hZ2VyIHZpY2t5Iiwicm9sZSI6ImFkbWluIn19.4BXq9CUyzu1xmzbMXiXCQRgYR2mJgQ__AKSqKyE70aA"}
+    #     
     #     res = self.app.delete('/order/3', headers=headers)
     #     data = json.loads(res.data)
     #     self.assertEqual(data['message'], "Order with ID 3 has been deleted")
 
 
     # def test_order_filter(self):
-    #     headers = { "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJtYW5hZ2VyIHZpY2t5Iiwicm9sZSI6ImFkbWluIn19.4BXq9CUyzu1xmzbMXiXCQRgYR2mJgQ__AKSqKyE70aA"}
+    #     
     #     res = self.app.get("/order/filter/received", headers=headers)
     #     data = json.loads(res.data)
     #     self.assertEqual(data['message'], "filtered orders where status is received")
@@ -150,6 +152,12 @@ class ZomatoTest(unittest.TestCase):
     #     self.assertEqual(data['message'], "Order not found")
     
         
+    # def test_analysis(self):
+    #     
+    #     res = self.app.get("/analysis", headers=headers)
+    #     data = json.loads(res.data)
+    #     self.assertEqual(data['message'], "Analysis")
+
 
 if __name__ == '__main__':
     unittest.main()
